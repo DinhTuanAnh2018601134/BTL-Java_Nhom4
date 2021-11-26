@@ -11,6 +11,6 @@ package app;
  */
 public class Main1 {
     public static void main(String[] args) {
-        System.out.println("commit 1");
+        System.out.println("commit 2");
     }
 }
