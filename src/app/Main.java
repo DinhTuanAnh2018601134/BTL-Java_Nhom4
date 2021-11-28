@@ -5,17 +5,32 @@
  */
 package app;
 
+import forms.FormQLDienThoai;
+import forms.FormQLHoaDon;
+import forms.FormQLKhachHang;
+import forms.FormQLNhanVien;
+import forms.FormThongKe;
+import forms.FormTrangChu;
+
 /**
  *
  * @author tuananh
  */
 public class Main extends javax.swing.JFrame {
+    private FormQLDienThoai formDT;
+    private FormQLNhanVien formNV;
+    private FormQLKhachHang formKH;
+    private FormQLHoaDon formHD;
+    private FormThongKe formTK;
+    private FormTrangChu formTC;
 
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        formTC = new FormTrangChu();
+//        jPanelContent.add(formTC.jPanelTC);
     }
 
     /**
@@ -27,21 +42,86 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanelContent = new javax.swing.JPanel();
+        jPanelNav = new javax.swing.JPanel();
+        btnTrangChu = new javax.swing.JButton();
+        btnQLDienThoai = new javax.swing.JButton();
+        btnQLNhanVIen = new javax.swing.JButton();
+        btnQLKhachHang = new javax.swing.JButton();
+        btnQLHoaDon = new javax.swing.JButton();
+        btnThongKe = new javax.swing.JButton();
+        btnDangXuat = new javax.swing.JButton();
+        jPanelLogo1 = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1150, 600));
+        setSize(new java.awt.Dimension(1150, 600));
+        getContentPane().setLayout(null);
+
+        jPanelContent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanelContent.setLayout(null);
+        getContentPane().add(jPanelContent);
+        jPanelContent.setBounds(250, 0, 900, 600);
+
+        jPanelNav.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanelNav.setLayout(null);
+
+        btnTrangChu.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnTrangChu.setText("Trang Chủ");
+        jPanelNav.add(btnTrangChu);
+        btnTrangChu.setBounds(0, 0, 250, 50);
+
+        btnQLDienThoai.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnQLDienThoai.setText("QL Điện Thoại");
+        btnQLDienThoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLDienThoaiActionPerformed(evt);
+            }
+        });
+        jPanelNav.add(btnQLDienThoai);
+        btnQLDienThoai.setBounds(0, 50, 250, 50);
+
+        btnQLNhanVIen.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnQLNhanVIen.setText("QL Nhân Viên");
+        jPanelNav.add(btnQLNhanVIen);
+        btnQLNhanVIen.setBounds(0, 100, 250, 50);
+
+        btnQLKhachHang.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnQLKhachHang.setText("QL Khách Hàng");
+        jPanelNav.add(btnQLKhachHang);
+        btnQLKhachHang.setBounds(0, 150, 250, 50);
+
+        btnQLHoaDon.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnQLHoaDon.setText("QL Hóa Đơn");
+        jPanelNav.add(btnQLHoaDon);
+        btnQLHoaDon.setBounds(0, 200, 250, 50);
+
+        btnThongKe.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnThongKe.setText("Thống kê");
+        jPanelNav.add(btnThongKe);
+        btnThongKe.setBounds(0, 250, 250, 50);
+
+        btnDangXuat.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnDangXuat.setText("Đăng Xuất");
+        jPanelNav.add(btnDangXuat);
+        btnDangXuat.setBounds(0, 300, 250, 50);
+
+        getContentPane().add(jPanelNav);
+        jPanelNav.setBounds(0, 180, 250, 420);
+
+        jPanelLogo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanelLogo1.setLayout(null);
+        getContentPane().add(jPanelLogo1);
+        jPanelLogo1.setBounds(0, 0, 250, 180);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnQLDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLDienThoaiActionPerformed
+        jPanelContent.removeAll();
+        formDT = new FormQLDienThoai();
+        jPanelContent.add(formDT.jPanelQLDT);
+    }//GEN-LAST:event_btnQLDienThoaiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +159,15 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDangXuat;
+    private javax.swing.JButton btnQLDienThoai;
+    private javax.swing.JButton btnQLHoaDon;
+    private javax.swing.JButton btnQLKhachHang;
+    private javax.swing.JButton btnQLNhanVIen;
+    private javax.swing.JButton btnThongKe;
+    private javax.swing.JButton btnTrangChu;
+    public javax.swing.JPanel jPanelContent;
+    private javax.swing.JPanel jPanelLogo1;
+    private javax.swing.JPanel jPanelNav;
     // End of variables declaration//GEN-END:variables
 }
