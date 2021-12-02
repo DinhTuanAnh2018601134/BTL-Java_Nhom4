@@ -5,32 +5,18 @@
  */
 package app;
 
-import forms.FormQLDienThoai;
-import forms.FormQLHoaDon;
-import forms.FormQLKhachHang;
-import forms.FormQLNhanVien;
-import forms.FormThongKe;
-import forms.FormTrangChu;
-
+import forms.JPaneFormQLHoaDon;
 /**
  *
  * @author tuananh
  */
 public class Main extends javax.swing.JFrame {
-    private FormQLDienThoai formDT;
-    private FormQLNhanVien formNV;
-    private FormQLKhachHang formKH;
-    private FormQLHoaDon formHD;
-    private FormThongKe formTK;
-    private FormTrangChu formTC;
 
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
-        formTC = new FormTrangChu();
-//        jPanelContent.add(formTC.jPanelTC);
     }
 
     /**
@@ -62,6 +48,7 @@ public class Main extends javax.swing.JFrame {
         jPanelContent.setLayout(null);
         getContentPane().add(jPanelContent);
         jPanelContent.setBounds(250, 0, 900, 600);
+        jPanelContent.getAccessibleContext().setAccessibleParent(jPanelContent);
 
         jPanelNav.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanelNav.setLayout(null);
@@ -93,6 +80,11 @@ public class Main extends javax.swing.JFrame {
 
         btnQLHoaDon.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLHoaDon.setText("QL Hóa Đơn");
+        btnQLHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLHoaDonActionPerformed(evt);
+            }
+        });
         jPanelNav.add(btnQLHoaDon);
         btnQLHoaDon.setBounds(0, 200, 250, 50);
 
@@ -119,9 +111,14 @@ public class Main extends javax.swing.JFrame {
 
     private void btnQLDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLDienThoaiActionPerformed
         jPanelContent.removeAll();
-        formDT = new FormQLDienThoai();
-        jPanelContent.add(formDT.jPanelQLDT);
+        
     }//GEN-LAST:event_btnQLDienThoaiActionPerformed
+
+    private void btnQLHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLHoaDonActionPerformed
+        JPaneFormQLHoaDon formHD = new JPaneFormQLHoaDon();
+        jPanelContent.add(formHD);
+        formHD.setSize(900, 600);
+    }//GEN-LAST:event_btnQLHoaDonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,7 +163,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnQLNhanVIen;
     private javax.swing.JButton btnThongKe;
     private javax.swing.JButton btnTrangChu;
-    public javax.swing.JPanel jPanelContent;
+    private javax.swing.JPanel jPanelContent;
     private javax.swing.JPanel jPanelLogo1;
     private javax.swing.JPanel jPanelNav;
     // End of variables declaration//GEN-END:variables
