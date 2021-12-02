@@ -83,6 +83,11 @@ public class Main extends javax.swing.JFrame {
 
         btnQLNhanVIen.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLNhanVIen.setText("QL Nhân Viên");
+        btnQLNhanVIen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLNhanVIenActionPerformed(evt);
+            }
+        });
         jPanelNav.add(btnQLNhanVIen);
         btnQLNhanVIen.setBounds(0, 100, 250, 50);
 
@@ -93,6 +98,11 @@ public class Main extends javax.swing.JFrame {
 
         btnQLHoaDon.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLHoaDon.setText("QL Hóa Đơn");
+        btnQLHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLHoaDonActionPerformed(evt);
+            }
+        });
         jPanelNav.add(btnQLHoaDon);
         btnQLHoaDon.setBounds(0, 200, 250, 50);
 
@@ -122,6 +132,14 @@ public class Main extends javax.swing.JFrame {
         formDT = new FormQLDienThoai();
         jPanelContent.add(formDT.jPanelQLDT);
     }//GEN-LAST:event_btnQLDienThoaiActionPerformed
+
+    private void btnQLHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLHoaDonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQLHoaDonActionPerformed
+
+    private void btnQLNhanVIenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNhanVIenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQLNhanVIenActionPerformed
 
     /**
      * @param args the command line arguments
