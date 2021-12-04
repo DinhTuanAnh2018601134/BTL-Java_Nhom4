@@ -70,6 +70,11 @@ public class Main extends javax.swing.JFrame {
 
         btnQLNhanVIen.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLNhanVIen.setText("QL Nhân Viên");
+        btnQLNhanVIen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLNhanVIenActionPerformed(evt);
+            }
+        });
         jPanelNav.add(btnQLNhanVIen);
         btnQLNhanVIen.setBounds(0, 100, 250, 50);
 
@@ -115,11 +120,21 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLDienThoaiActionPerformed
 
     private void btnQLHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLHoaDonActionPerformed
+<<<<<<< HEAD
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQLHoaDonActionPerformed
+
+    private void btnQLNhanVIenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNhanVIenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQLNhanVIenActionPerformed
+
+=======
         JPaneFormQLHoaDon formHD = new JPaneFormQLHoaDon();
         jPanelContent.add(formHD);
         formHD.setSize(900, 600);
     }//GEN-LAST:event_btnQLHoaDonActionPerformed
 
+>>>>>>> 02486b83e93a374c7912f6e247b003ce8346026e
     /**
      * @param args the command line arguments
      */
