@@ -29,6 +29,7 @@ public class FormQLKhachHang extends javax.swing.JFrame {
 
         jPanelQLKH = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 600));
@@ -42,6 +43,10 @@ public class FormQLKhachHang extends javax.swing.JFrame {
         jLabel1.setText("Quản Lý Khách Hàng");
         jPanelQLKH.add(jLabel1);
         jLabel1.setBounds(335, 6, 250, 29);
+
+        jLabel2.setText("jLabel2");
+        jPanelQLKH.add(jLabel2);
+        jLabel2.setBounds(210, 110, 34, 14);
 
         getContentPane().add(jPanelQLKH);
         jPanelQLKH.setBounds(0, 0, 900, 600);
@@ -86,6 +91,7 @@ public class FormQLKhachHang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     public javax.swing.JPanel jPanelQLKH;
     // End of variables declaration//GEN-END:variables
 }
