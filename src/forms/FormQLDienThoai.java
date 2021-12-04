@@ -29,6 +29,32 @@ public class FormQLDienThoai extends javax.swing.JFrame {
 
         jPanelQLDT = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        label1 = new java.awt.Label();
+        label2 = new java.awt.Label();
+        label3 = new java.awt.Label();
+        label4 = new java.awt.Label();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        label5 = new java.awt.Label();
+        label6 = new java.awt.Label();
+        label7 = new java.awt.Label();
+        label8 = new java.awt.Label();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        button1 = new java.awt.Button();
+        button2 = new java.awt.Button();
+        button3 = new java.awt.Button();
+        button4 = new java.awt.Button();
+        button5 = new java.awt.Button();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jTextField7 = new javax.swing.JTextField();
+        button6 = new java.awt.Button();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDienThoai = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 600));
@@ -36,12 +62,190 @@ public class FormQLDienThoai extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jPanelQLDT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanelQLDT.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jPanelQLDT.setName("formQLDT"); // NOI18N
         jPanelQLDT.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("Quản Lý Điện Thoại");
         jPanelQLDT.add(jLabel1);
-        jLabel1.setBounds(335, 6, 232, 29);
+        jLabel1.setBounds(335, 6, 250, 29);
+
+        label1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label1.setText("Mã Điện Thoại");
+        jPanelQLDT.add(label1);
+        label1.setBounds(20, 60, 90, 21);
+
+        label2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label2.setText("Hãng Sản Xuất");
+        jPanelQLDT.add(label2);
+        label2.setBounds(20, 90, 90, 21);
+
+        label3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label3.setText("Tên Điện Thoại");
+        jPanelQLDT.add(label3);
+        label3.setBounds(20, 120, 100, 21);
+
+        label4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label4.setText("Số Lượng");
+        jPanelQLDT.add(label4);
+        label4.setBounds(20, 150, 70, 21);
+
+        jTextField1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField1.setName("txtMaDT"); // NOI18N
+        jPanelQLDT.add(jTextField1);
+        jTextField1.setBounds(130, 60, 170, 23);
+
+        jTextField2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField2.setName("txtTenDT"); // NOI18N
+        jPanelQLDT.add(jTextField2);
+        jTextField2.setBounds(130, 120, 170, 23);
+
+        jTextField3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField3.setName("txtSoLuong"); // NOI18N
+        jPanelQLDT.add(jTextField3);
+        jTextField3.setBounds(130, 150, 170, 23);
+
+        jComboBox1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apple", "SamSung", "Sony", "Nokia", "LG", "Xiaomi", "ViVo", "Oppo", "Google", "Huawei", "HTC", "Lenovo" }));
+        jComboBox1.setName("cbxHang"); // NOI18N
+        jPanelQLDT.add(jComboBox1);
+        jComboBox1.setBounds(130, 90, 170, 23);
+
+        label5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label5.setText("Giá bán");
+        jPanelQLDT.add(label5);
+        label5.setBounds(390, 60, 50, 21);
+
+        label6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label6.setText("Ram");
+        jPanelQLDT.add(label6);
+        label6.setBounds(390, 90, 31, 21);
+
+        label7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label7.setText("Rom");
+        jPanelQLDT.add(label7);
+        label7.setBounds(390, 120, 32, 21);
+
+        label8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label8.setText("Kho");
+        jPanelQLDT.add(label8);
+        label8.setBounds(390, 150, 29, 21);
+
+        jTextField4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField4.setName("txtGia"); // NOI18N
+        jPanelQLDT.add(jTextField4);
+        jTextField4.setBounds(470, 60, 160, 23);
+
+        jTextField5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField5.setName("txtRam"); // NOI18N
+        jPanelQLDT.add(jTextField5);
+        jTextField5.setBounds(470, 90, 160, 23);
+
+        jTextField6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField6.setName("txtRom"); // NOI18N
+        jPanelQLDT.add(jTextField6);
+        jTextField6.setBounds(470, 120, 160, 23);
+
+        jComboBox2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kho 1", "Kho 2", "Kho 3", "Kho 4", "Kho 5", "Kho 6", "Kho 7" }));
+        jComboBox2.setName("cbxKho"); // NOI18N
+        jPanelQLDT.add(jComboBox2);
+        jComboBox2.setBounds(470, 150, 160, 23);
+
+        button1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button1.setLabel("Thêm");
+        button1.setName("btnThem"); // NOI18N
+        jPanelQLDT.add(button1);
+        button1.setBounds(740, 60, 70, 20);
+
+        button2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button2.setLabel("Cập nhật");
+        button2.setName("btnCN"); // NOI18N
+        jPanelQLDT.add(button2);
+        button2.setBounds(740, 90, 70, 20);
+
+        button3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button3.setLabel("Xóa");
+        button3.setName("btnXoa"); // NOI18N
+        jPanelQLDT.add(button3);
+        button3.setBounds(740, 120, 70, 20);
+
+        button4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button4.setLabel("Xuất File");
+        button4.setName("btnXuat"); // NOI18N
+        jPanelQLDT.add(button4);
+        button4.setBounds(740, 150, 70, 20);
+
+        button5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button5.setLabel("Lọc");
+        button5.setName("btnLoc"); // NOI18N
+        jPanelQLDT.add(button5);
+        button5.setBounds(20, 200, 70, 20);
+
+        jComboBox3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setName("cbxLoc"); // NOI18N
+        jPanelQLDT.add(jComboBox3);
+        jComboBox3.setBounds(100, 200, 160, 20);
+
+        jTextField7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField7.setText("Nhập tên điện thoại cần tìm kiếm");
+        jTextField7.setFocusCycleRoot(true);
+        jTextField7.setName("txtTimKiem"); // NOI18N
+        jPanelQLDT.add(jTextField7);
+        jTextField7.setBounds(280, 200, 220, 20);
+
+        button6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button6.setLabel("Tìm Kiếm");
+        button6.setName("btnTimKiem"); // NOI18N
+        jPanelQLDT.add(button6);
+        button6.setBounds(510, 200, 80, 20);
+
+        jScrollPane1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        tblDienThoai.setBackground(new java.awt.Color(240, 240, 240));
+        tblDienThoai.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tblDienThoai.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Hãng Sản Xuất", "Tên Điện Thoại", "Số Lượng", "Giá Bán", "Ram", "Rom", "Mã Kho"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblDienThoai.setName("tblDienThoai"); // NOI18N
+        jScrollPane1.setViewportView(tblDienThoai);
+
+        jPanelQLDT.add(jScrollPane1);
+        jScrollPane1.setBounds(20, 240, 860, 350);
 
         getContentPane().add(jPanelQLDT);
         jPanelQLDT.setBounds(0, 0, 900, 600);
@@ -86,7 +290,33 @@ public class FormQLDienThoai extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button button1;
+    private java.awt.Button button2;
+    private java.awt.Button button3;
+    private java.awt.Button button4;
+    private java.awt.Button button5;
+    private java.awt.Button button6;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     public javax.swing.JPanel jPanelQLDT;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private java.awt.Label label1;
+    private java.awt.Label label2;
+    private java.awt.Label label3;
+    private java.awt.Label label4;
+    private java.awt.Label label5;
+    private java.awt.Label label6;
+    private java.awt.Label label7;
+    private java.awt.Label label8;
+    private javax.swing.JTable tblDienThoai;
     // End of variables declaration//GEN-END:variables
 }
