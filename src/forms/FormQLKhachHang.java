@@ -30,6 +30,27 @@ public class FormQLKhachHang extends javax.swing.JFrame {
         jPanelQLKH = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtMaKH = new javax.swing.JTextField();
+        txtTenKH = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableQLKH = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtDiaChi = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        btnThem = new javax.swing.JButton();
+        btnCapNhat = new javax.swing.JButton();
+        btnXuaFile = new javax.swing.JButton();
+        btnTimKiem = new javax.swing.JButton();
+        txtTim = new javax.swing.JTextField();
+        btnLoc = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        cbGioiTinh = new javax.swing.JComboBox<>();
+        cbLoc = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 600));
@@ -44,9 +65,133 @@ public class FormQLKhachHang extends javax.swing.JFrame {
         jPanelQLKH.add(jLabel1);
         jLabel1.setBounds(335, 6, 250, 29);
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel2.setText("Mã Khách Hàng");
         jPanelQLKH.add(jLabel2);
-        jLabel2.setBounds(210, 110, 34, 14);
+        jLabel2.setBounds(10, 60, 130, 20);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel3.setText("Tên Khách Hàng");
+        jPanelQLKH.add(jLabel3);
+        jLabel3.setBounds(10, 100, 140, 20);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel4.setText("Giới Tính");
+        jPanelQLKH.add(jLabel4);
+        jLabel4.setBounds(10, 140, 73, 20);
+
+        txtMaKH.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanelQLKH.add(txtMaKH);
+        txtMaKH.setBounds(150, 60, 190, 28);
+
+        txtTenKH.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanelQLKH.add(txtTenKH);
+        txtTenKH.setBounds(150, 100, 190, 28);
+
+        jTableQLKH.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã Khách Hàng", "Tên Khách Hàng", "Giới Tính", "Địa Chỉ", "Số Điện Thoại", "Email"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableQLKH);
+
+        jPanelQLKH.add(jScrollPane1);
+        jScrollPane1.setBounds(0, 262, 900, 340);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel5.setText("Địa Chỉ");
+        jPanelQLKH.add(jLabel5);
+        jLabel5.setBounds(430, 60, 70, 20);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel6.setText("SĐT");
+        jPanelQLKH.add(jLabel6);
+        jLabel6.setBounds(430, 100, 70, 20);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel7.setText("Email");
+        jPanelQLKH.add(jLabel7);
+        jLabel7.setBounds(430, 140, 70, 20);
+
+        txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanelQLKH.add(txtDiaChi);
+        txtDiaChi.setBounds(510, 60, 190, 28);
+
+        txtSDT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanelQLKH.add(txtSDT);
+        txtSDT.setBounds(510, 100, 190, 28);
+
+        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanelQLKH.add(txtEmail);
+        txtEmail.setBounds(510, 140, 190, 28);
+
+        btnThem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnThem.setText("Thêm");
+        jPanelQLKH.add(btnThem);
+        btnThem.setBounds(720, 60, 160, 29);
+
+        btnCapNhat.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnCapNhat.setText("Cập Nhật");
+        jPanelQLKH.add(btnCapNhat);
+        btnCapNhat.setBounds(720, 100, 160, 29);
+
+        btnXuaFile.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnXuaFile.setText("Xuất File");
+        jPanelQLKH.add(btnXuaFile);
+        btnXuaFile.setBounds(720, 180, 160, 29);
+
+        btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnTimKiem.setText("Tìm Kiếm");
+        jPanelQLKH.add(btnTimKiem);
+        btnTimKiem.setBounds(410, 230, 109, 27);
+
+        txtTim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTim.setText("Nhập Mã Khách Hàng Cần Tìm");
+        txtTim.setToolTipText("");
+        jPanelQLKH.add(txtTim);
+        txtTim.setBounds(240, 230, 170, 27);
+
+        btnLoc.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnLoc.setText("Lọc");
+        jPanelQLKH.add(btnLoc);
+        btnLoc.setBounds(10, 230, 80, 27);
+
+        btnXoa.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        btnXoa.setText("Xóa");
+        jPanelQLKH.add(btnXoa);
+        btnXoa.setBounds(720, 140, 160, 29);
+
+        cbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        jPanelQLKH.add(cbGioiTinh);
+        cbGioiTinh.setBounds(150, 140, 190, 25);
+
+        cbLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL" }));
+        jPanelQLKH.add(cbLoc);
+        cbLoc.setBounds(100, 230, 120, 27);
 
         getContentPane().add(jPanelQLKH);
         jPanelQLKH.setBounds(0, 0, 900, 600);
@@ -90,8 +235,29 @@ public class FormQLKhachHang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnLoc;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btnXuaFile;
+    private javax.swing.JComboBox<String> cbGioiTinh;
+    private javax.swing.JComboBox<String> cbLoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     public javax.swing.JPanel jPanelQLKH;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableQLKH;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMaKH;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtTenKH;
+    private javax.swing.JTextField txtTim;
     // End of variables declaration//GEN-END:variables
 }
