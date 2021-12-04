@@ -5,11 +5,20 @@
  */
 package connect;
 
+import java.sql.*;
+import static java.sql.DriverManager.getConnection;
+
 /**
  *
  * @author tuananh
  */
 public class ConnectToSQL {
+
+    private static String DB_URL = "jdbc:sqlserver://localhost:1433;"
+            + "databaseName=Phones;"
+            + "integratedSecurity=true";
+    private static String USER_NAME = "tuananh";
+    private static String PASSWORD = "";
     
-    
+
 }
