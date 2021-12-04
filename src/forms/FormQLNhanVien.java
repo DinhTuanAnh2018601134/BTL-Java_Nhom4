@@ -211,17 +211,20 @@ public class FormQLNhanVien extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTable1.setName("tblNhanvien"); // NOI18N
         jScrollPane1.setViewportView(jTable1);
 
         jPanelQLNV.add(jScrollPane1);
         jScrollPane1.setBounds(40, 340, 820, 240);
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        jComboBox3.setName("cbxAll"); // NOI18N
         jPanelQLNV.add(jComboBox3);
         jComboBox3.setBounds(170, 290, 90, 25);
 
         jButton5.setText("Tìm kiếm");
         jButton5.setToolTipText("");
+        jButton5.setName("btnTimkiem"); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -232,10 +235,12 @@ public class FormQLNhanVien extends javax.swing.JFrame {
 
         jButton6.setText("Lọc");
         jButton6.setToolTipText("");
+        jButton6.setName("btnLoc"); // NOI18N
         jPanelQLNV.add(jButton6);
         jButton6.setBounds(100, 290, 70, 25);
 
         jTextField7.setText("Nhập tên nhân viên cần tìm");
+        jTextField7.setName("txtTimkiem"); // NOI18N
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
