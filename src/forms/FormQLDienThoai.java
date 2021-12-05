@@ -54,13 +54,14 @@ public class FormQLDienThoai extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox<>();
         jTextField6 = new javax.swing.JTextField();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 600));
         setSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(null);
 
-        jPanelQLDT.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        jPanelQLDT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanelQLDT.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -137,7 +138,7 @@ public class FormQLDienThoai extends javax.swing.JFrame {
             }
         });
         jPanelQLDT.add(jButton1);
-        jButton1.setBounds(80, 260, 80, 23);
+        jButton1.setBounds(40, 260, 80, 23);
 
         jButton2.setText("Xóa");
         jPanelQLDT.add(jButton2);
@@ -161,14 +162,16 @@ public class FormQLDienThoai extends javax.swing.JFrame {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
         jPanelQLDT.add(jComboBox3);
-        jComboBox3.setBounds(160, 260, 150, 20);
+        jComboBox3.setBounds(120, 260, 150, 20);
 
         jTextField6.setText("Nhập thông tin cần tìm");
         jPanelQLDT.add(jTextField6);
-        jTextField6.setBounds(310, 260, 250, 20);
+        jTextField6.setBounds(300, 260, 250, 20);
+        jPanelQLDT.add(jTabbedPane1);
+        jTabbedPane1.setBounds(40, 300, 590, 220);
 
         getContentPane().add(jPanelQLDT);
-        jPanelQLDT.setBounds(0, -10, 900, 600);
+        jPanelQLDT.setBounds(0, 0, 900, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -237,6 +240,7 @@ public class FormQLDienThoai extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     public javax.swing.JPanel jPanelQLDT;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
