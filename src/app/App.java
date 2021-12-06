@@ -4,21 +4,22 @@
  * and open the template in the editor.
  */
 package app;
-
-import forms.FormQLDienThoai;
 import forms.JPaneFormQLHoaDon;
 import forms.JPanelFormXuatHoaDon;
-
+import forms.JPanelFormQLKhachHang;
+import forms.JPanelFormQLNhanVien;
+import forms.JpanelFormQLDienThoai;
+import forms.JPanelFormThongKe;
 /**
  *
  * @author tuananh
  */
-public class Main extends javax.swing.JFrame {
+public class App extends javax.swing.JFrame {
 
     /**
-     * Creates new form Main
+     * Creates new form App
      */
-    public Main() {
+    public App() {
         initComponents();
     }
 
@@ -32,6 +33,7 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelContent = new javax.swing.JPanel();
+        jPanelLogo1 = new javax.swing.JPanel();
         jPanelNav = new javax.swing.JPanel();
         btnTrangChu = new javax.swing.JButton();
         btnQLDienThoai = new javax.swing.JButton();
@@ -41,18 +43,21 @@ public class Main extends javax.swing.JFrame {
         btnThongKe = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
         btnXuatHoaDon = new javax.swing.JButton();
-        jPanelLogo1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1150, 600));
-        setSize(new java.awt.Dimension(1150, 600));
         getContentPane().setLayout(null);
 
         jPanelContent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanelContent.setMinimumSize(new java.awt.Dimension(900, 600));
         jPanelContent.setLayout(null);
         getContentPane().add(jPanelContent);
         jPanelContent.setBounds(250, 0, 900, 600);
-        jPanelContent.getAccessibleContext().setAccessibleParent(jPanelContent);
+
+        jPanelLogo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanelLogo1.setLayout(null);
+        getContentPane().add(jPanelLogo1);
+        jPanelLogo1.setBounds(0, 0, 250, 180);
 
         jPanelNav.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanelNav.setLayout(null);
@@ -74,11 +79,21 @@ public class Main extends javax.swing.JFrame {
 
         btnQLNhanVIen.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLNhanVIen.setText("QL Nhân Viên");
+        btnQLNhanVIen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLNhanVIenActionPerformed(evt);
+            }
+        });
         jPanelNav.add(btnQLNhanVIen);
         btnQLNhanVIen.setBounds(0, 90, 250, 45);
 
         btnQLKhachHang.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLKhachHang.setText("QL Khách Hàng");
+        btnQLKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLKhachHangActionPerformed(evt);
+            }
+        });
         jPanelNav.add(btnQLKhachHang);
         btnQLKhachHang.setBounds(0, 135, 250, 45);
 
@@ -94,6 +109,11 @@ public class Main extends javax.swing.JFrame {
 
         btnThongKe.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnThongKe.setText("Thống kê");
+        btnThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeActionPerformed(evt);
+            }
+        });
         jPanelNav.add(btnThongKe);
         btnThongKe.setBounds(0, 270, 250, 45);
 
@@ -115,19 +135,22 @@ public class Main extends javax.swing.JFrame {
         getContentPane().add(jPanelNav);
         jPanelNav.setBounds(0, 180, 250, 420);
 
-        jPanelLogo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanelLogo1.setLayout(null);
-        getContentPane().add(jPanelLogo1);
-        jPanelLogo1.setBounds(0, 0, 250, 180);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQLDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLDienThoaiActionPerformed
         jPanelContent.removeAll();
-        FormQLDienThoai formdt = new FormQLDienThoai();
-        formdt.setVisible(true);
+        JpanelFormQLDienThoai formDT = new JpanelFormQLDienThoai();
+        jPanelContent.add(formDT);
+        formDT.setSize(900, 600);
     }//GEN-LAST:event_btnQLDienThoaiActionPerformed
+
+    private void btnQLNhanVIenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLNhanVIenActionPerformed
+        jPanelContent.removeAll();
+        JPanelFormQLNhanVien formNV = new JPanelFormQLNhanVien();
+        jPanelContent.add(formNV);
+        formNV.setSize(900, 600);
+    }//GEN-LAST:event_btnQLNhanVIenActionPerformed
 
     private void btnQLHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLHoaDonActionPerformed
         jPanelContent.removeAll();
@@ -142,6 +165,20 @@ public class Main extends javax.swing.JFrame {
         jPanelContent.add(formxhd);
         formxhd.setSize(900, 600);
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed
+
+    private void btnQLKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLKhachHangActionPerformed
+        jPanelContent.removeAll();
+        JPanelFormQLKhachHang formKH = new JPanelFormQLKhachHang();
+        jPanelContent.add(formKH);
+        formKH.setSize(900, 600);
+    }//GEN-LAST:event_btnQLKhachHangActionPerformed
+
+    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        jPanelContent.removeAll();
+        JPanelFormThongKe formTK = new JPanelFormThongKe();
+        jPanelContent.add(formTK);
+        formTK.setSize(900, 600);
+    }//GEN-LAST:event_btnThongKeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,20 +197,20 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(App.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new App().setVisible(true);
             }
         });
     }
