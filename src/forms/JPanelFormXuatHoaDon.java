@@ -405,6 +405,11 @@ public class JPanelFormXuatHoaDon extends javax.swing.JPanel {
 
         btnThemHoaDon.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnThemHoaDon.setText("Thêm Hóa Đơn");
+        btnThemHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemHoaDonActionPerformed(evt);
+            }
+        });
         add(btnThemHoaDon);
         btnThemHoaDon.setBounds(540, 220, 160, 30);
 
@@ -481,6 +486,10 @@ public class JPanelFormXuatHoaDon extends javax.swing.JPanel {
     private void tblDienThoaiBanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDienThoaiBanMouseClicked
         i = tblDienThoaiBan.getSelectedRow();
     }//GEN-LAST:event_tblDienThoaiBanMouseClicked
+
+    private void btnThemHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemHoaDonActionPerformed
+        
+    }//GEN-LAST:event_btnThemHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

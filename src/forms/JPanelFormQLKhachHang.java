@@ -5,19 +5,83 @@
  */
 package forms;
 
+import classes.KhachHang;
+import connect.ConnectToSQL;
+import java.sql.Connection;
+import static java.sql.DriverManager.getConnection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tuananh
  */
 public class JPanelFormQLKhachHang extends javax.swing.JPanel {
-
+    ConnectToSQL sql = new ConnectToSQL();
+    private final String DB_URL = sql.DB_URL;
+    private final String USER_NAME = sql.USER_NAME;
+    private final String PASSWORD = sql.PASSWORD;
+    private Connection conn;
+    private Statement stmt;
+    private final ArrayList<KhachHang> dskh = new ArrayList<>();
     /**
      * Creates new form JPanelFormQLKhachHang
      */
     public JPanelFormQLKhachHang() {
         initComponents();
+        getDanhSanhKhachHang();
+        HienThiDanhSachKhachHang(dskh);
     }
-
+    private void getDanhSanhKhachHang(){
+        try {
+            // connnect to database 'phones'
+            conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+            // crate statement
+            stmt = conn.createStatement();
+            // get data from table 'hoa don'
+            ResultSet rs = stmt.executeQuery("select * from KhachHang");
+            // show data
+            while (rs.next()) {
+                KhachHang kh = new KhachHang();
+                kh.setMaKH(rs.getString(1));
+                kh.setTenKH(rs.getString(2));
+                kh.setGioitinh(rs.getString(3));
+                kh.setDiaChi(rs.getString(4));
+                kh.setEmail(rs.getString(5));
+                kh.setSdt(rs.getString(6));
+                dskh.add(kh);
+            }
+            // close connection
+            conn.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    private void HienThiDanhSachKhachHang(ArrayList<KhachHang> dskh) {
+        try {
+            // show data
+            DefaultTableModel tblModel = null;
+            String header[] = {"Mã Khách Hàng", "Tên Khách Hàng", "Giới tính", "Địa Chỉ", "SDT", "Email"};
+            tblModel = new DefaultTableModel(header, 0);
+            Vector data = null;
+            for (KhachHang kh : dskh) {
+                data = new Vector();
+                data.add(kh.getMaKH());
+                data.add(kh.getTenKH());
+                data.add(kh.getGioitinh());
+                data.add(kh.getDiaChi());
+                data.add(kh.getEmail());
+                data.add(kh.getSdt());
+                tblModel.addRow(data);
+            }
+            jTableQLKH.setModel(tblModel);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -136,13 +200,13 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
         btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
         add(btnTimKiem);
-        btnTimKiem.setBounds(410, 230, 109, 27);
+        btnTimKiem.setBounds(450, 230, 109, 27);
 
         txtTim.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtTim.setText("Nhập Mã Khách Hàng Cần Tìm");
+        txtTim.setText("Nhập Tên Khách Hàng Cần Tìm");
         txtTim.setToolTipText("");
         add(txtTim);
-        txtTim.setBounds(240, 230, 170, 27);
+        txtTim.setBounds(240, 230, 200, 27);
 
         cbLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALL" }));
         add(cbLoc);

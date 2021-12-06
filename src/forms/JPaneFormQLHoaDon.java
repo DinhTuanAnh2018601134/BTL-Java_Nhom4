@@ -1,6 +1,7 @@
 package forms;
 
 import classes.HoaDon;
+import connect.ConnectToSQL;
 import java.sql.*;
 import static java.sql.DriverManager.getConnection;
 import java.util.ArrayList;
@@ -9,36 +10,30 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class JPaneFormQLHoaDon extends javax.swing.JPanel {
-
-    private static String DB_URL = "jdbc:sqlserver://localhost:1433;"
-            + "databaseName=Phones;"
-            + "integratedSecurity=true";
-    private static String USER_NAME = "tuananh";
-    private static String PASSWORD = "";
-    private static Connection conn;
-    private static Statement stmt;
-    private ArrayList<HoaDon> dshd = new ArrayList<>();
+    ConnectToSQL sql = new ConnectToSQL();
+    private final String DB_URL = sql.DB_URL;
+    private final String USER_NAME = sql.USER_NAME;
+    private final String PASSWORD = sql.PASSWORD;
+    private  Connection conn;
+    private  Statement stmt;
+    private final ArrayList<HoaDon> dshd = new ArrayList<>();
 
     /**
      * Creates new form JPaneFormQLHoaDonl
      */
     public JPaneFormQLHoaDon() {
         initComponents();
+        getDanhSach();
+        HienThiDanhSach(dshd);
+    }
+
+    //Lấy ds từ csdl vào mảng 
+    private void getDanhSach() {
         try {
             // connnect to database 'phones'
             conn = getConnection(DB_URL, USER_NAME, PASSWORD);
             // crate statement
             stmt = conn.createStatement();
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-
-        getDanhSach();
-        HienThiDanhSach(dshd);
-    }
-
-    private void getDanhSach() {
-        try {
             // get data from table 'hoa don'
             ResultSet rs = stmt.executeQuery("select MaHD,NgayLap,HoaDon.MaNV,TenNV,HoaDon.MaKH,TenKH from HoaDon "
                     + "inner join KhachHang on HoaDon.MaKH = KhachHang.MaKH "
@@ -60,7 +55,7 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }
-
+    //hiển thị ds từ mảng ra bảng
     private void HienThiDanhSach(ArrayList<HoaDon> dshd) {
         try {
             // show data
@@ -85,6 +80,7 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
         }
     }
 
+    //click vao bảng thì hiện dữ liệu lên textbox
     private void HienThiChiTiet(int selectedIndex) {
         txtMaHoaDon.setText(dshd.get(selectedIndex).getMaHD());
         txtNgaylap.setText(dshd.get(selectedIndex).getNgayLap());
@@ -93,7 +89,7 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
         txtMaKhachHang.setText(dshd.get(selectedIndex).getMaKH());
         txtTenKhachHang.setText(dshd.get(selectedIndex).getTenKH());
     }
-
+    //hien thi danh sach tim kiem len bang
     private void HienThiTimKiem(String maHD) {
         ArrayList<HoaDon> dshdtk = new ArrayList<>();
         for (HoaDon hd : dshd) {
@@ -104,7 +100,7 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
         }
         HienThiDanhSach(dshdtk);
     }
-
+    //xóa hóa đơn khỏi mảng
     private void XoaHoaDon(String maHD) {
         for (HoaDon hd : dshd) {
             if (maHD.equals(hd.getMaHD())) {
@@ -113,7 +109,7 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
             }
         }
     }
-
+    //xóa hóa đơn khỏi csdl
     private void XoaHoaDonCSDL(String maHD) {
         try {
             // connnect to database 'testdb'
@@ -129,7 +125,7 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }
-
+    //clear textbox
     private void ClearTextbox() {
         txtMaHoaDon.setText("");
         txtNgaylap.setText("");
@@ -274,13 +270,8 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
         txtTenKhachHang.setBounds(510, 140, 190, 28);
 
         btnXuatHoaDon.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnXuatHoaDon.setText("Thêm Hóa Đơn");
+        btnXuatHoaDon.setText("Sửa Hóa Đơn");
         btnXuatHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnXuatHoaDon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXuatHoaDonActionPerformed(evt);
-            }
-        });
         add(btnXuatHoaDon);
         btnXuatHoaDon.setBounds(720, 60, 170, 31);
 
@@ -333,12 +324,12 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
         add(jFormattedTextField1);
         jFormattedTextField1.setBounds(10, 230, 150, 27);
     }// </editor-fold>//GEN-END:initComponents
-
+    //sự liện click vào bảng
     private void jTableHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableHoaDonMouseClicked
         int selectedIndex = jTableHoaDon.getSelectedRow();
         HienThiChiTiet(selectedIndex);
     }//GEN-LAST:event_jTableHoaDonMouseClicked
-
+    //click nut tìm kiếm
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         String id = txtTim.getText();
         if (id.equals("")) {
@@ -347,11 +338,11 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
             HienThiTimKiem(id);
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
-
+    
     private void txtTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimMouseClicked
         txtTim.setText("");
     }//GEN-LAST:event_txtTimMouseClicked
-
+    //click nút xóa hóa đơn
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         String id = txtMaHoaDon.getText();
         XoaHoaDon(id);
@@ -359,12 +350,6 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
         HienThiDanhSach(dshd);
         XoaHoaDonCSDL(id);
     }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
-        JPanelFormXuatHoaDon formxhd = new JPanelFormXuatHoaDon();
-        formxhd.setSize(900, 600);
-        formxhd.show();
-    }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

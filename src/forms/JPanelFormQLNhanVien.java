@@ -5,19 +5,115 @@
  */
 package forms;
 
+import classes.NhanVien;
+import connect.ConnectToSQL;
+import java.sql.Connection;
+import static java.sql.DriverManager.getConnection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tuananh
  */
 public class JPanelFormQLNhanVien extends javax.swing.JPanel {
-
+    ConnectToSQL sql = new ConnectToSQL();
+    private final String DB_URL = sql.DB_URL;
+    private final String USER_NAME = sql.USER_NAME;
+    private final String PASSWORD = sql.PASSWORD;
+    private Connection conn;
+    private Statement stmt;
+    private final ArrayList<NhanVien> dsnv = new ArrayList<>();
     /**
      * Creates new form JPanelFormQLNhanVien
      */
     public JPanelFormQLNhanVien() {
         initComponents();
+        getDanhSanhKhachHang();
+        HienThiDanhSachKhachHang(dsnv);
     }
-
+    private void getDanhSanhKhachHang(){
+        try {
+            // connnect to database 'phones'
+            conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+            // crate statement
+            stmt = conn.createStatement();
+            // get data from table 'hoa don'
+            ResultSet rs = stmt.executeQuery("select * from NhanVien");
+            // show data
+            while (rs.next()) {
+                NhanVien nv = new NhanVien();
+                nv.setMaNV(rs.getString(1));
+                nv.setTenNV(rs.getString(2));
+                nv.setGioitinh(rs.getString(4));
+                nv.setDiaChi(rs.getString(5));
+                nv.setEmail(rs.getString(7));
+                nv.setSdt(rs.getString(6));
+                nv.setLuong(Integer.parseInt(rs.getString(3)));
+                nv.setMaCV(rs.getString(8));
+                dsnv.add(nv);
+            }
+            // close connection
+            conn.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    private void HienThiDanhSachKhachHang(ArrayList<NhanVien> dsnv) {
+        try {
+            // show data
+            DefaultTableModel tblModel = null;
+            String header[] = {"ID", "Tên Nhân Viên", "Giới tính","Chức Vụ", "Địa Chỉ", "SDT", "Email", "Lương"};
+            tblModel = new DefaultTableModel(header, 0);
+            Vector data = null;
+            for (NhanVien nv : dsnv) {
+                data = new Vector();
+                data.add(nv.getMaNV());
+                data.add(nv.getTenNV());
+                data.add(nv.getGioitinh());
+                data.add(setChucVu(nv.getMaCV()));
+                data.add(nv.getDiaChi());
+                data.add(nv.getSdt());
+                data.add(nv.getEmail());
+                data.add(nv.getLuong());
+                tblModel.addRow(data);
+            }
+            tblNhanVien.setModel(tblModel);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    private String setChucVu(String maCV){
+        switch(maCV.trim()){
+            case "BH":
+                return "Bán Hàng";
+            case "BV":
+                return "Bảo Vệ";
+            case "KT":
+                return "Kế Toán";
+            case "QL":
+                return "Quản Lý";
+            default:
+                return "";
+        }
+    }
+    private String setMaCV(String cv){
+        switch(cv){
+            case "Bán Hàng":
+                return "BH";
+            case "Bảo Vệ":
+                return "BV";
+            case "Kế Toán":
+                return "KT";
+            case "Quản Lý":
+                return "QL";
+            default:
+                return "";
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +149,7 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
         jTextField7 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblNhanVien = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(900, 600));
         setLayout(null);
@@ -73,15 +169,10 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
         jComboBox2.setName("cbxGioitinh"); // NOI18N
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
         add(jComboBox2);
         jComboBox2.setBounds(210, 180, 160, 20);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bán hàng", "Thu ngân" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bán Hàng", "Bảo Vệ", "Kế Toán", "Quản Lý" }));
         jComboBox1.setName("cbxChucvu"); // NOI18N
         add(jComboBox1);
         jComboBox1.setBounds(210, 220, 160, 20);
@@ -104,21 +195,11 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
 
         jButton2.setText("Thêm");
         jButton2.setName("btnThem"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
         add(jButton2);
         jButton2.setBounds(700, 100, 90, 23);
 
         jButton3.setText("Cập Nhập");
         jButton3.setName("btnCapnhap"); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
         add(jButton3);
         jButton3.setBounds(700, 140, 90, 23);
 
@@ -129,11 +210,6 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
 
         jButton1.setText("Xuất File");
         jButton1.setName("btnXuatfile"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
         add(jButton1);
         jButton1.setBounds(700, 220, 90, 23);
 
@@ -169,7 +245,7 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
         add(jLabel5);
         jLabel5.setBounds(460, 220, 50, 20);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Bán Hàng", "Bảo Vệ", "Kế Toán", "Quản Lý" }));
         jComboBox3.setName("cbxAll"); // NOI18N
         add(jComboBox3);
         jComboBox3.setBounds(170, 290, 90, 25);
@@ -193,15 +269,10 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
         jButton5.setText("Tìm kiếm");
         jButton5.setToolTipText("");
         jButton5.setName("btnTimkiem"); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
         add(jButton5);
         jButton5.setBounds(600, 290, 90, 25);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -236,36 +307,16 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jTable1.setName("tblNhanvien"); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
+        tblNhanVien.setName("tblNhanvien"); // NOI18N
+        jScrollPane1.setViewportView(tblNhanVien);
 
         add(jScrollPane1);
         jScrollPane1.setBounds(40, 340, 820, 240);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -288,7 +339,6 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -296,5 +346,6 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable tblNhanVien;
     // End of variables declaration//GEN-END:variables
 }

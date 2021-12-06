@@ -5,19 +5,134 @@
  */
 package forms;
 
+import classes.DienThoai;
+import connect.ConnectToSQL;
+import java.sql.Connection;
+import static java.sql.DriverManager.getConnection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author tuananh
  */
 public class JpanelFormQLDienThoai extends javax.swing.JPanel {
 
+    ConnectToSQL sql = new ConnectToSQL();
+    private final String DB_URL = sql.DB_URL;
+    private final String USER_NAME = sql.USER_NAME;
+    private final String PASSWORD = sql.PASSWORD;
+    private Connection conn;
+    private Statement stmt;
+    private final ArrayList<DienThoai> dsdt = new ArrayList<>();
+
     /**
      * Creates new form JpanelFormQLDienThoai
      */
     public JpanelFormQLDienThoai() {
         initComponents();
+        getDanhSanhDienThoai();
+        HienThiDanhSachDienThoai(dsdt);        
     }
 
+    private void getDanhSanhDienThoai(){
+        try {
+            // connnect to database 'phones'
+            conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+            // crate statement
+            stmt = conn.createStatement();
+            // get data from table 'hoa don'
+            ResultSet rs = stmt.executeQuery("select * from DienThoai ");
+            // show data
+            while (rs.next()) {
+                DienThoai dt = new DienThoai();
+                dt.setMaDT(rs.getString(1));
+                dt.setMaHangSX(rs.getString(2));
+                dt.setTenDT(rs.getString(3));
+                dt.setSoLuong(Integer.parseInt(rs.getString(4)));
+                dt.setGiaBan(Integer.parseInt(rs.getString(5)));
+                dt.setRam(Integer.parseInt(rs.getString(6)));
+                dt.setRom(Integer.parseInt(rs.getString(7)));
+                dt.setMaKho(rs.getString(8));
+                dsdt.add(dt);
+            }
+            // close connection
+            conn.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    private void HienThiDanhSachDienThoai(ArrayList<DienThoai> dsdt) {
+        try {
+            // show data
+            DefaultTableModel tblModel = null;
+            String header[] = {"ID", "Hãng Sản Xuất", "Tên Điện Thoại", "Số Lượng", "Gia Bán", "Ram", "Rom","Kho"};
+            tblModel = new DefaultTableModel(header, 0);
+            Vector data = null;
+            for (DienThoai dt : dsdt) {
+                data = new Vector();
+                data.add(dt.getMaDT());
+                data.add(setHangSX(dt.getMaHangSX()));
+                data.add(dt.getTenDT());
+                data.add(dt.getSoLuong());
+                data.add(dt.getGiaBan());
+                data.add(dt.getRam());
+                data.add(dt.getRom());
+                data.add(dt.getMaKho());
+                tblModel.addRow(data);
+            }
+            tblDienThoai.setModel(tblModel);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    private String setHangSX(String maHangSX){
+        switch(maHangSX.trim()){
+            case "AP":
+                return "Apple";
+            case "SS":
+                return "SamSung";
+            case "SO":
+                return "Sony";
+            case "NO":
+                return "Nokia";
+            case "LG":
+                return "LG";
+            case "XI":
+                return "Xiaomi";
+            case "VI":
+                return "Vivo";
+            case "OP":
+                return "Oppo";
+            default:
+                return "";
+        }
+    }
+    private String setMaHangSX(String hangSX){
+        switch(hangSX){
+            case "Apple":
+                return "AP";
+            case "SamSung":
+                return "SS";
+            case "Sony":
+                return "SO";
+            case "Nokia":
+                return "NO";
+            case "LG":
+                return "LG";
+            case "Xiaomi":
+                return "XI";
+            case "Vivo":
+                return "VI";
+            case "OPOppo":
+                return "OP";
+            default:
+                return "";
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,19 +142,256 @@ public class JpanelFormQLDienThoai extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        label1 = new java.awt.Label();
+        label2 = new java.awt.Label();
+        label3 = new java.awt.Label();
+        label4 = new java.awt.Label();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
+        label5 = new java.awt.Label();
+        label6 = new java.awt.Label();
+        label7 = new java.awt.Label();
+        label8 = new java.awt.Label();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnThemDienThoai = new java.awt.Button();
+        button2 = new java.awt.Button();
+        button3 = new java.awt.Button();
+        button4 = new java.awt.Button();
+        button6 = new java.awt.Button();
+        jTextField7 = new javax.swing.JTextField();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        button5 = new java.awt.Button();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDienThoai = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(900, 600));
         setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Quản Lý Điện Thoại");
-        add(jLabel1);
-        jLabel1.setBounds(335, 6, 250, 29);
+        label1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label1.setText("Mã Điện Thoại");
+        add(label1);
+        label1.setBounds(20, 60, 90, 21);
+
+        label2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label2.setText("Hãng Sản Xuất");
+        add(label2);
+        label2.setBounds(20, 90, 90, 21);
+
+        label3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label3.setText("Tên Điện Thoại");
+        add(label3);
+        label3.setBounds(20, 120, 100, 21);
+
+        label4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label4.setText("Số Lượng");
+        add(label4);
+        label4.setBounds(20, 150, 70, 21);
+
+        jTextField3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField3.setName("txtSoLuong"); // NOI18N
+        add(jTextField3);
+        jTextField3.setBounds(130, 150, 170, 23);
+
+        jTextField2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField2.setName("txtTenDT"); // NOI18N
+        add(jTextField2);
+        jTextField2.setBounds(130, 120, 170, 23);
+
+        jComboBox1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apple", "SamSung", "Sony", "Nokia", "LG", "Xiaomi", "ViVo", "Oppo" }));
+        jComboBox1.setName("cbxHang"); // NOI18N
+        add(jComboBox1);
+        jComboBox1.setBounds(130, 90, 170, 23);
+
+        jTextField1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField1.setName("txtMaDT"); // NOI18N
+        add(jTextField1);
+        jTextField1.setBounds(130, 60, 170, 23);
+
+        label5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label5.setText("Giá bán");
+        add(label5);
+        label5.setBounds(390, 60, 50, 21);
+
+        label6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label6.setText("Ram");
+        add(label6);
+        label6.setBounds(390, 90, 30, 21);
+
+        label7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label7.setText("Rom");
+        add(label7);
+        label7.setBounds(390, 120, 31, 21);
+
+        label8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        label8.setText("Kho");
+        add(label8);
+        label8.setBounds(390, 150, 27, 21);
+
+        jComboBox2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "KHO_001", "KHO_002" }));
+        jComboBox2.setName("cbxKho"); // NOI18N
+        add(jComboBox2);
+        jComboBox2.setBounds(470, 150, 160, 23);
+
+        jTextField6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField6.setName("txtRom"); // NOI18N
+        add(jTextField6);
+        jTextField6.setBounds(470, 120, 160, 23);
+
+        jTextField5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField5.setName("txtRam"); // NOI18N
+        add(jTextField5);
+        jTextField5.setBounds(470, 90, 160, 23);
+
+        jTextField4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField4.setName("txtGia"); // NOI18N
+        add(jTextField4);
+        jTextField4.setBounds(470, 60, 160, 23);
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setText("Quản Lý Điện Thoại");
+        add(jLabel2);
+        jLabel2.setBounds(335, 6, 250, 28);
+
+        btnThemDienThoai.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        btnThemDienThoai.setLabel("Thêm");
+        btnThemDienThoai.setName("btnThem"); // NOI18N
+        btnThemDienThoai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemDienThoaiActionPerformed(evt);
+            }
+        });
+        add(btnThemDienThoai);
+        btnThemDienThoai.setBounds(740, 60, 70, 20);
+
+        button2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button2.setLabel("Cập nhật");
+        button2.setName("btnCN"); // NOI18N
+        add(button2);
+        button2.setBounds(740, 90, 70, 20);
+
+        button3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button3.setLabel("Xóa");
+        button3.setName("btnXoa"); // NOI18N
+        add(button3);
+        button3.setBounds(740, 120, 70, 20);
+
+        button4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button4.setLabel("Xuất File");
+        button4.setName("btnXuat"); // NOI18N
+        add(button4);
+        button4.setBounds(740, 150, 70, 20);
+
+        button6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button6.setLabel("Tìm Kiếm");
+        button6.setName("btnTimKiem"); // NOI18N
+        add(button6);
+        button6.setBounds(510, 200, 80, 20);
+
+        jTextField7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField7.setText("Nhập tên điện thoại cần tìm kiếm");
+        jTextField7.setFocusCycleRoot(true);
+        jTextField7.setName("txtTimKiem"); // NOI18N
+        add(jTextField7);
+        jTextField7.setBounds(280, 200, 220, 20);
+
+        jComboBox3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Apple", "SamSung", "Sony", "Nokia", "LG", "Xiaomi", "ViVo", "Oppo" }));
+        jComboBox3.setName("cbxLoc"); // NOI18N
+        add(jComboBox3);
+        jComboBox3.setBounds(100, 200, 160, 20);
+
+        button5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        button5.setLabel("Lọc");
+        button5.setName("btnLoc"); // NOI18N
+        add(button5);
+        button5.setBounds(20, 200, 70, 20);
+
+        jScrollPane1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        tblDienThoai.setBackground(new java.awt.Color(240, 240, 240));
+        tblDienThoai.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tblDienThoai.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Hãng Sản Xuất", "Tên Điện Thoại", "Số Lượng", "Giá Bán", "Ram", "Rom", "Mã Kho"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblDienThoai.setName("tblDienThoai"); // NOI18N
+        jScrollPane1.setViewportView(tblDienThoai);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(20, 240, 860, 350);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDienThoaiActionPerformed
+        
+    }//GEN-LAST:event_btnThemDienThoaiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private java.awt.Button btnThemDienThoai;
+    private java.awt.Button button2;
+    private java.awt.Button button3;
+    private java.awt.Button button4;
+    private java.awt.Button button5;
+    private java.awt.Button button6;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private java.awt.Label label1;
+    private java.awt.Label label2;
+    private java.awt.Label label3;
+    private java.awt.Label label4;
+    private java.awt.Label label5;
+    private java.awt.Label label6;
+    private java.awt.Label label7;
+    private java.awt.Label label8;
+    private javax.swing.JTable tblDienThoai;
     // End of variables declaration//GEN-END:variables
 }
