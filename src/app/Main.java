@@ -5,7 +5,10 @@
  */
 package app;
 
+import forms.FormQLDienThoai;
 import forms.JPaneFormQLHoaDon;
+import forms.JPanelFormXuatHoaDon;
+
 /**
  *
  * @author tuananh
@@ -37,6 +40,7 @@ public class Main extends javax.swing.JFrame {
         btnQLHoaDon = new javax.swing.JButton();
         btnThongKe = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
+        btnXuatHoaDon = new javax.swing.JButton();
         jPanelLogo1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,7 +60,7 @@ public class Main extends javax.swing.JFrame {
         btnTrangChu.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnTrangChu.setText("Trang Chủ");
         jPanelNav.add(btnTrangChu);
-        btnTrangChu.setBounds(0, 0, 250, 50);
+        btnTrangChu.setBounds(0, 0, 250, 45);
 
         btnQLDienThoai.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLDienThoai.setText("QL Điện Thoại");
@@ -66,17 +70,17 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jPanelNav.add(btnQLDienThoai);
-        btnQLDienThoai.setBounds(0, 50, 250, 50);
+        btnQLDienThoai.setBounds(0, 45, 250, 45);
 
         btnQLNhanVIen.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLNhanVIen.setText("QL Nhân Viên");
         jPanelNav.add(btnQLNhanVIen);
-        btnQLNhanVIen.setBounds(0, 100, 250, 50);
+        btnQLNhanVIen.setBounds(0, 90, 250, 45);
 
         btnQLKhachHang.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLKhachHang.setText("QL Khách Hàng");
         jPanelNav.add(btnQLKhachHang);
-        btnQLKhachHang.setBounds(0, 150, 250, 50);
+        btnQLKhachHang.setBounds(0, 135, 250, 45);
 
         btnQLHoaDon.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnQLHoaDon.setText("QL Hóa Đơn");
@@ -86,17 +90,27 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jPanelNav.add(btnQLHoaDon);
-        btnQLHoaDon.setBounds(0, 200, 250, 50);
+        btnQLHoaDon.setBounds(0, 180, 250, 45);
 
         btnThongKe.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnThongKe.setText("Thống kê");
         jPanelNav.add(btnThongKe);
-        btnThongKe.setBounds(0, 250, 250, 50);
+        btnThongKe.setBounds(0, 270, 250, 45);
 
         btnDangXuat.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnDangXuat.setText("Đăng Xuất");
         jPanelNav.add(btnDangXuat);
-        btnDangXuat.setBounds(0, 300, 250, 50);
+        btnDangXuat.setBounds(0, 315, 250, 45);
+
+        btnXuatHoaDon.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnXuatHoaDon.setText("Xuất Hóa Đơn");
+        btnXuatHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatHoaDonActionPerformed(evt);
+            }
+        });
+        jPanelNav.add(btnXuatHoaDon);
+        btnXuatHoaDon.setBounds(0, 225, 250, 45);
 
         getContentPane().add(jPanelNav);
         jPanelNav.setBounds(0, 180, 250, 420);
@@ -111,14 +125,23 @@ public class Main extends javax.swing.JFrame {
 
     private void btnQLDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLDienThoaiActionPerformed
         jPanelContent.removeAll();
-        
+        FormQLDienThoai formdt = new FormQLDienThoai();
+        formdt.setVisible(true);
     }//GEN-LAST:event_btnQLDienThoaiActionPerformed
 
     private void btnQLHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLHoaDonActionPerformed
+        jPanelContent.removeAll();
         JPaneFormQLHoaDon formHD = new JPaneFormQLHoaDon();
         jPanelContent.add(formHD);
         formHD.setSize(900, 600);
     }//GEN-LAST:event_btnQLHoaDonActionPerformed
+
+    private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
+        jPanelContent.removeAll();
+        JPanelFormXuatHoaDon formxhd = new JPanelFormXuatHoaDon();
+        jPanelContent.add(formxhd);
+        formxhd.setSize(900, 600);
+    }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,7 +186,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnQLNhanVIen;
     private javax.swing.JButton btnThongKe;
     private javax.swing.JButton btnTrangChu;
-    private javax.swing.JPanel jPanelContent;
+    private javax.swing.JButton btnXuatHoaDon;
+    public javax.swing.JPanel jPanelContent;
     private javax.swing.JPanel jPanelLogo1;
     private javax.swing.JPanel jPanelNav;
     // End of variables declaration//GEN-END:variables
