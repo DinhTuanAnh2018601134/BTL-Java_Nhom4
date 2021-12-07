@@ -28,6 +28,17 @@ public class JPanelFormThongKe extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        btnDoanhthu = new javax.swing.JButton();
+        btnDienthoaibanchay = new javax.swing.JButton();
+        btnHoadon = new javax.swing.JButton();
+        llblTu = new java.awt.Label();
+        lblDen = new java.awt.Label();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtNgaydau = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtNgaycuoi = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(900, 600));
         setLayout(null);
@@ -36,10 +47,92 @@ public class JPanelFormThongKe extends javax.swing.JPanel {
         jLabel1.setText("Thống Kê");
         add(jLabel1);
         jLabel1.setBounds(335, 6, 130, 29);
+
+        btnDoanhthu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnDoanhthu.setText("Doanh Thu");
+        btnDoanhthu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoanhthuActionPerformed(evt);
+            }
+        });
+        add(btnDoanhthu);
+        btnDoanhthu.setBounds(0, 140, 150, 30);
+        btnDoanhthu.getAccessibleContext().setAccessibleName("Doanh Thu");
+
+        btnDienthoaibanchay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnDienthoaibanchay.setText("Điện Thoại Bán Chạy");
+        btnDienthoaibanchay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDienthoaibanchayActionPerformed(evt);
+            }
+        });
+        add(btnDienthoaibanchay);
+        btnDienthoaibanchay.setBounds(150, 140, 230, 30);
+
+        btnHoadon.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnHoadon.setText("Hóa Đơn");
+        add(btnHoadon);
+        btnHoadon.setBounds(380, 140, 120, 30);
+
+        llblTu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        llblTu.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        llblTu.setText("Từ");
+        add(llblTu);
+        llblTu.setBounds(40, 80, 34, 20);
+
+        lblDen.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblDen.setText("Đến");
+        add(lblDen);
+        lblDen.setBounds(280, 80, 34, 20);
+
+        jScrollPane1.setViewportView(txtNgaydau);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(80, 80, 170, 22);
+
+        jScrollPane2.setViewportView(txtNgaycuoi);
+
+        add(jScrollPane2);
+        jScrollPane2.setBounds(330, 80, 170, 22);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        add(jScrollPane3);
+        jScrollPane3.setBounds(2, 172, 880, 290);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDienthoaibanchayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDienthoaibanchayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDienthoaibanchayActionPerformed
+
+    private void btnDoanhthuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoanhthuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDoanhthuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDienthoaibanchay;
+    private javax.swing.JButton btnDoanhthu;
+    private javax.swing.JButton btnHoadon;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private java.awt.Label lblDen;
+    private java.awt.Label llblTu;
+    private javax.swing.JTextPane txtNgaycuoi;
+    private javax.swing.JTextPane txtNgaydau;
     // End of variables declaration//GEN-END:variables
 }
