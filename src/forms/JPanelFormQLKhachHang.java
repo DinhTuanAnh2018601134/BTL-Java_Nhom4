@@ -10,9 +10,13 @@ import connect.ConnectToSQL;
 import java.sql.Connection;
 import static java.sql.DriverManager.getConnection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
  * @author tuananh
  */
 public class JPanelFormQLKhachHang extends javax.swing.JPanel {
+
     ConnectToSQL sql = new ConnectToSQL();
     private final String DB_URL = sql.DB_URL;
     private final String USER_NAME = sql.USER_NAME;
@@ -27,6 +32,7 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
     private Connection conn;
     private Statement stmt;
     private final ArrayList<KhachHang> dskh = new ArrayList<>();
+
     /**
      * Creates new form JPanelFormQLKhachHang
      */
@@ -35,7 +41,8 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
         getDanhSanhKhachHang();
         HienThiDanhSachKhachHang(dskh);
     }
-    private void getDanhSanhKhachHang(){
+
+    private void getDanhSanhKhachHang() {
         try {
             // connnect to database 'phones'
             conn = getConnection(DB_URL, USER_NAME, PASSWORD);
@@ -60,6 +67,7 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }
+
     private void HienThiDanhSachKhachHang(ArrayList<KhachHang> dskh) {
         try {
             // show data
@@ -73,8 +81,8 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
                 data.add(kh.getTenKH());
                 data.add(kh.getGioitinh());
                 data.add(kh.getDiaChi());
-                data.add(kh.getEmail());
                 data.add(kh.getSdt());
+                 data.add(kh.getEmail());
                 tblModel.addRow(data);
             }
             jTableQLKH.setModel(tblModel);
@@ -82,6 +90,37 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }
+
+    private void ThemKH() {
+
+        String maKH = txtMaKH.getText();
+        String tenKH = txtTenKH.getText();
+        String gioTinh = (String) cbGioiTinh.getSelectedItem();
+        String diaChi = txtDiaChi.getText();
+        String sdt = txtSDT.getText();
+        String email = txtEmail.getText();
+        KhachHang kh = new KhachHang(maKH);
+        if (dskh.contains(kh)) {
+            JOptionPane.showMessageDialog(null, "Mã khách hàng đã tồn tại", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        } else {
+            kh = new KhachHang(maKH, tenKH, gioTinh, diaChi, sdt, email);
+            dskh.add(kh);
+            try {
+                conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+                stmt = conn.createStatement();
+                // Them dữ liệu cho bảng khách hàng
+                String sql="insert into KhachHang values('" + maKH + "'" + ",N'" + tenKH + "',N'" + gioTinh + "',N'" + diaChi + "','" + sdt + "','" + email + "')";
+                stmt.executeUpdate(sql);
+                conn.close();
+            } catch (Exception ex) {
+                Logger.getLogger(JPanelFormQLKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+
+        HienThiDanhSachKhachHang(dskh);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -179,6 +218,11 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
 
         btnThem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
         add(btnThem);
         btnThem.setBounds(720, 60, 160, 29);
 
@@ -251,6 +295,10 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
         add(jScrollPane1);
         jScrollPane1.setBounds(0, 262, 900, 340);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        ThemKH();// TODO add your handling code here:
+    }//GEN-LAST:event_btnThemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,8 @@
  */
 package classes;
 
+import java.util.Objects;
+
 /**
  *
  * @author tuananh
@@ -17,6 +19,22 @@ public class KhachHang {
     private String sdt;
     private String email;
 
+    public KhachHang(String maKH, String tenKH, String gioitinh, String diaChi, String sdt, String email) {
+        this.maKH = maKH;
+        this.tenKH = tenKH;
+        this.gioitinh = gioitinh;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
+        this.email = email;
+    }
+
+    public KhachHang(String maKH) {
+        this.maKH = maKH;
+    }
+
+    public KhachHang() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     public String getMaKH() {
         return maKH;
     }
@@ -63,6 +81,31 @@ public class KhachHang {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.maKH);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final KhachHang other = (KhachHang) obj;
+        if (!Objects.equals(this.maKH, other.maKH)) {
+            return false;
+        }
+        return true;
     }
     
 }

@@ -11,10 +11,10 @@ package connect;
  */
 public class ConnectToSQL {
     public String DB_URL = "jdbc:sqlserver://localhost:1433;"
-            + "databaseName=Phones;"
-            + "integratedSecurity=true";
-    public String USER_NAME = "tuananh";
-    public String PASSWORD = "";
+            + "databaseName=Phones;";
+//            + "integratedSecurity=true";
+    public String USER_NAME = "sa";
+    public String PASSWORD = "123";
 
     public ConnectToSQL() {
     }
