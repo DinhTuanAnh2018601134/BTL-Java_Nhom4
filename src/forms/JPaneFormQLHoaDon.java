@@ -187,7 +187,7 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
         jLabel3.setText("Ngày Lập");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         add(jLabel3);
-        jLabel3.setBounds(10, 100, 83, 22);
+        jLabel3.setBounds(10, 100, 110, 22);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Mã Nhân Viên");

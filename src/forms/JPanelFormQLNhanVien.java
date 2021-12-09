@@ -13,6 +13,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -75,13 +78,13 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
                 data.add(nv.getTenNV());
                 data.add(nv.getGioitinh());
                 data.add(setChucVu(nv.getMaCV()));
-                data.add(nv.getDiaChi());
+             
                 data.add(nv.getSdt());
                 data.add(nv.getEmail());
                 data.add(nv.getLuong());
                 tblModel.addRow(data);
             }
-            tblNhanVien.setModel(tblModel);
+            tblNhanvien.setModel(tblModel);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -124,18 +127,18 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        txtManhanvien = new javax.swing.JTextField();
+        txtTennhanvien = new javax.swing.JTextField();
+        cbxGioitinh = new javax.swing.JComboBox<>();
+        cbxChucvu = new javax.swing.JComboBox<>();
+        txtLuong = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
+        txtDiachi = new javax.swing.JTextField();
+        btnThem = new javax.swing.JButton();
+        btnCapnhap = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnXuatfile = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -144,12 +147,12 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jButton6 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        cbxAll = new javax.swing.JComboBox<>();
+        btnLoc = new javax.swing.JButton();
+        txtTimkiem = new javax.swing.JTextField();
+        btnTimkiem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblNhanVien = new javax.swing.JTable();
+        tblNhanvien = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(900, 600));
         setLayout(null);
@@ -159,59 +162,64 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
         add(jLabel1);
         jLabel1.setBounds(335, 6, 380, 29);
 
-        jTextField2.setName("txtManhanvien"); // NOI18N
-        add(jTextField2);
-        jTextField2.setBounds(210, 100, 160, 20);
+        txtManhanvien.setName("txtManhanvien"); // NOI18N
+        add(txtManhanvien);
+        txtManhanvien.setBounds(210, 100, 160, 20);
 
-        jTextField3.setName("txtTennhanvien"); // NOI18N
-        add(jTextField3);
-        jTextField3.setBounds(210, 140, 160, 20);
+        txtTennhanvien.setName("txtTennhanvien"); // NOI18N
+        add(txtTennhanvien);
+        txtTennhanvien.setBounds(210, 140, 160, 20);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        jComboBox2.setName("cbxGioitinh"); // NOI18N
-        add(jComboBox2);
-        jComboBox2.setBounds(210, 180, 160, 20);
+        cbxGioitinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        cbxGioitinh.setName("cbxGioitinh"); // NOI18N
+        add(cbxGioitinh);
+        cbxGioitinh.setBounds(210, 180, 160, 20);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bán Hàng", "Bảo Vệ", "Kế Toán", "Quản Lý" }));
-        jComboBox1.setName("cbxChucvu"); // NOI18N
-        add(jComboBox1);
-        jComboBox1.setBounds(210, 220, 160, 20);
+        cbxChucvu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bán Hàng", "Bảo Vệ", "Kế Toán", "Quản Lý" }));
+        cbxChucvu.setName("cbxChucvu"); // NOI18N
+        add(cbxChucvu);
+        cbxChucvu.setBounds(210, 220, 160, 20);
 
-        jTextField1.setName("txtLuong"); // NOI18N
-        add(jTextField1);
-        jTextField1.setBounds(510, 220, 160, 20);
+        txtLuong.setName("txtLuong"); // NOI18N
+        add(txtLuong);
+        txtLuong.setBounds(510, 220, 160, 20);
 
-        jTextField6.setName("txtEmail"); // NOI18N
-        add(jTextField6);
-        jTextField6.setBounds(510, 180, 160, 20);
+        txtEmail.setName("txtEmail"); // NOI18N
+        add(txtEmail);
+        txtEmail.setBounds(510, 180, 160, 20);
 
-        jTextField5.setName("txtSDT"); // NOI18N
-        add(jTextField5);
-        jTextField5.setBounds(510, 140, 160, 20);
+        txtSDT.setName("txtSDT"); // NOI18N
+        add(txtSDT);
+        txtSDT.setBounds(510, 140, 160, 20);
 
-        jTextField4.setName("txtDiachi"); // NOI18N
-        add(jTextField4);
-        jTextField4.setBounds(510, 100, 160, 20);
+        txtDiachi.setName("txtDiachi"); // NOI18N
+        add(txtDiachi);
+        txtDiachi.setBounds(510, 100, 160, 20);
 
-        jButton2.setText("Thêm");
-        jButton2.setName("btnThem"); // NOI18N
-        add(jButton2);
-        jButton2.setBounds(700, 100, 90, 23);
+        btnThem.setText("Thêm");
+        btnThem.setName("btnThem"); // NOI18N
+        add(btnThem);
+        btnThem.setBounds(700, 100, 90, 23);
 
-        jButton3.setText("Cập Nhập");
-        jButton3.setName("btnCapnhap"); // NOI18N
-        add(jButton3);
-        jButton3.setBounds(700, 140, 90, 23);
+        btnCapnhap.setText("Cập Nhập");
+        btnCapnhap.setName("btnCapnhap"); // NOI18N
+        add(btnCapnhap);
+        btnCapnhap.setBounds(700, 140, 90, 23);
 
-        jButton4.setText("Xóa");
-        jButton4.setName("btnXoa"); // NOI18N
-        add(jButton4);
-        jButton4.setBounds(700, 180, 90, 23);
+        btnXoa.setText("Xóa");
+        btnXoa.setName("btnXoa"); // NOI18N
+        add(btnXoa);
+        btnXoa.setBounds(700, 180, 90, 23);
 
-        jButton1.setText("Xuất File");
-        jButton1.setName("btnXuatfile"); // NOI18N
-        add(jButton1);
-        jButton1.setBounds(700, 220, 90, 23);
+        btnXuatfile.setText("Xuất File");
+        btnXuatfile.setName("btnXuatfile"); // NOI18N
+        btnXuatfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatfileActionPerformed(evt);
+            }
+        });
+        add(btnXuatfile);
+        btnXuatfile.setBounds(700, 220, 90, 23);
 
         jLabel2.setText("Mã Nhân Viên");
         add(jLabel2);
@@ -245,34 +253,34 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
         add(jLabel5);
         jLabel5.setBounds(460, 220, 50, 20);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Bán Hàng", "Bảo Vệ", "Kế Toán", "Quản Lý" }));
-        jComboBox3.setName("cbxAll"); // NOI18N
-        add(jComboBox3);
-        jComboBox3.setBounds(170, 290, 90, 25);
+        cbxAll.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Bán Hàng", "Bảo Vệ", "Kế Toán", "Quản Lý" }));
+        cbxAll.setName("cbxAll"); // NOI18N
+        add(cbxAll);
+        cbxAll.setBounds(170, 290, 90, 25);
 
-        jButton6.setText("Lọc");
-        jButton6.setToolTipText("");
-        jButton6.setName("btnLoc"); // NOI18N
-        add(jButton6);
-        jButton6.setBounds(100, 290, 70, 25);
+        btnLoc.setText("Lọc");
+        btnLoc.setToolTipText("");
+        btnLoc.setName("btnLoc"); // NOI18N
+        add(btnLoc);
+        btnLoc.setBounds(100, 290, 70, 25);
 
-        jTextField7.setText("Nhập tên nhân viên cần tìm");
-        jTextField7.setName("txtTimkiem"); // NOI18N
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        txtTimkiem.setText("Nhập tên nhân viên cần tìm");
+        txtTimkiem.setName("txtTimkiem"); // NOI18N
+        txtTimkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                txtTimkiemActionPerformed(evt);
             }
         });
-        add(jTextField7);
-        jTextField7.setBounds(370, 290, 230, 25);
+        add(txtTimkiem);
+        txtTimkiem.setBounds(370, 290, 230, 25);
 
-        jButton5.setText("Tìm kiếm");
-        jButton5.setToolTipText("");
-        jButton5.setName("btnTimkiem"); // NOI18N
-        add(jButton5);
-        jButton5.setBounds(600, 290, 90, 25);
+        btnTimkiem.setText("Tìm kiếm");
+        btnTimkiem.setToolTipText("");
+        btnTimkiem.setName("btnTimkiem"); // NOI18N
+        add(btnTimkiem);
+        btnTimkiem.setBounds(600, 290, 90, 25);
 
-        tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
+        tblNhanvien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -307,28 +315,135 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        tblNhanVien.setName("tblNhanvien"); // NOI18N
-        jScrollPane1.setViewportView(tblNhanVien);
+        tblNhanvien.setName("tblNhanvien"); // NOI18N
+        jScrollPane1.setViewportView(tblNhanvien);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(40, 340, 820, 240);
+        jScrollPane1.setBounds(50, 330, 820, 240);
     }// </editor-fold>//GEN-END:initComponents
+     private void HienThiChiTiet(int selectedIndex) {
+        txtManhanvien.setText(dsnv.get(selectedIndex).getMaNV());
+        txtTennhanvien.setText(dsnv.get(selectedIndex).getTenNV());
+        cbxGioitinh.setSelectedItem(dsnv.get(selectedIndex).getGioitinh());
+        cbxChucvu.setSelectedItem(dsnv.get(selectedIndex).getMaCV());
+        txtSDT.setText(dsnv.get(selectedIndex).getSdt());
+        txtEmail.setText(dsnv.get(selectedIndex).getEmail());
+        txtLuong.setText(dsnv.get(selectedIndex).getLuong()+"");
+    }
+     private void ThemNV(){
+        String maNV = txtManhanvien.getText();
+        String tenNV=txtTennhanvien.getText();
+        String gioiTinh = (String) cbxGioitinh.getSelectedItem();
+        String chucVu =(String) cbxChucvu.getSelectedItem();
+        String sdt = txtSDT.getText();
+        String email = txtEmail.getText();
+        String luong = txtLuong.getText();
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        NhanVien nv = new NhanVien();
+        if (dsnv.contains(nv)) {
+                JOptionPane.showMessageDialog(null, "Mã nhân viên đã tồn tại", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            } else {
+                nv = new NhanVien();
+                dsnv.add(nv);
+                try {
+                    conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+                    stmt = conn.createStatement();
+                    // Them dữ liệu cho bảng khách hàng
+                    String sql="insert into NhanVien values('" + maNV + "'" + ",N'" + tenNV + "',N'" + gioiTinh + "',N'" + chucVu + "','" + sdt + "','" + email + "','"+ luong +"'')";
+                    stmt.executeUpdate(sql);
+                    conn.close();
+                } catch (Exception ex) {
+                    Logger.getLogger(JPanelFormQLNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        HienThiDanhSachKhachHang(dsnv);
+    }
+     private void HienThiTimKiem(String maNV) {
+        ArrayList<NhanVien> dstknv = new ArrayList<>();
+        for (NhanVien nv : dstknv) {
+            if (maNV.equalsIgnoreCase(nv.getMaNV().trim())) {
+                dstknv.add(nv);
+                break;
+            }
+        }
+        HienThiDanhSachKhachHang(dstknv);
+    }
+      private void XoaNhanVien(String maNV) {
+        for (NhanVien hd : dsnv) {
+            if (maNV.equals(hd.getMaNV())) {
+                dsnv.remove(hd);
+                break;
+            }
+        }
+    }
+       //xóa hóa đơn khỏi csdl
+    private void XoaNhanVienCSDL(String maNV) {
+        try {
+            // connnect to database 'testdb'
+            conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+            // crate statement
+            stmt = conn.createStatement();
+            String strSql = "delete from ChiTietHoaDon where MaHD='" + maNV +"'";
+            stmt.executeUpdate(strSql);
+            strSql = "delete from HoaDon where MaHD='" + maNV +"'";
+            stmt.executeUpdate(strSql);
+            conn.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+       private void ClearTextbox() {
+        txtManhanvien.setText("");
+        txtTennhanvien.setText("");
+        cbxGioitinh.setSelectedItem("");
+        cbxChucvu.setSelectedItem("");
+        txtSDT.setText("");
+        txtEmail.setText("");
+        txtLuong.setText("");
+        txtManhanvien.requestFocus(true);
+    }
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        String id = txtTimkiem.getText();
+        if (id.equals("")) {
+            HienThiDanhSachKhachHang(dsnv);
+        } else {
+            HienThiTimKiem(id);
+        }
+    }                                          
+    
+    private void txtTimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimkiemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+        txtTimkiem.setText("");
+    }//GEN-LAST:event_txtTimkiemActionPerformed
 
+    private void btnXuatfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatfileActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnXuatfileActionPerformed
+    private void tblNhanvienMouseClicked(java.awt.event.MouseEvent evt) {                                          
+        int selectedIndex = tblNhanvien.getSelectedRow();
+        HienThiChiTiet(selectedIndex);
+    }  
+     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        String id = txtManhanvien.getText();
+        XoaNhanVien(id);
+        ClearTextbox();
+        HienThiDanhSachKhachHang(dsnv);
+        XoaNhanVienCSDL(id);
+    }       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton btnCapnhap;
+    private javax.swing.JButton btnLoc;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnTimkiem;
+    private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btnXuatfile;
+    private javax.swing.JComboBox<String> cbxAll;
+    private javax.swing.JComboBox<String> cbxChucvu;
+    private javax.swing.JComboBox<String> cbxGioitinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -339,13 +454,13 @@ public class JPanelFormQLNhanVien extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTable tblNhanVien;
+    private javax.swing.JTable tblNhanvien;
+    private javax.swing.JTextField txtDiachi;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtLuong;
+    private javax.swing.JTextField txtManhanvien;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtTennhanvien;
+    private javax.swing.JTextField txtTimkiem;
     // End of variables declaration//GEN-END:variables
 }
