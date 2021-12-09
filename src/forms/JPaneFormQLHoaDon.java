@@ -272,6 +272,11 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
         btnXuatHoaDon.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnXuatHoaDon.setText("Sửa Hóa Đơn");
         btnXuatHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnXuatHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatHoaDonActionPerformed(evt);
+            }
+        });
         add(btnXuatHoaDon);
         btnXuatHoaDon.setBounds(720, 60, 170, 31);
 
@@ -350,6 +355,10 @@ public class JPaneFormQLHoaDon extends javax.swing.JPanel {
         HienThiDanhSach(dshd);
         XoaHoaDonCSDL(id);
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

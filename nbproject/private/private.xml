@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/java_btl/BTL-Java_Nhom4/src/forms/JPanelFormQLNhanVien.java</file>
-            <file>file:/D:/java_btl/BTL-Java_Nhom4/src/forms/JPanelFormQLKhachHang.java</file>
-            <file>file:/D:/java_btl/BTL-Java_Nhom4/src/forms/JPanelFormThongKe.java</file>
-            <file>file:/D:/java_btl/BTL-Java_Nhom4/src/forms/JPaneFormQLHoaDon.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/classes/HoaDon.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/classes/NhanVien.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/app/App.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/forms/JpanelFormQLDienThoai.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/classes/DienThoaiDaBan.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/connect/ConnectToSQL.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/forms/JPaneFormQLHoaDon.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/forms/JPanelFormThongKe.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/forms/JPanelFormQLKhachHang.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/classes/KhachHang.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/forms/JPanelFormXuatHoaDon.java</file>
+            <file>file:/D:/HocTap/BTL-Java_Nhom4/src/classes/DienThoai.java</file>
         </group>
     </open-files>
 </project-private>
