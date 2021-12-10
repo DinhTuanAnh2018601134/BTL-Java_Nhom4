@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -32,14 +33,26 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
     private Connection conn;
     private Statement stmt;
     private final ArrayList<KhachHang> dskh = new ArrayList<>();
+//    Vector<String> gt = new Vector<>();
 
     /**
      * Creates new form JPanelFormQLKhachHang
      */
     public JPanelFormQLKhachHang() {
         initComponents();
+//        loadCB();
         getDanhSanhKhachHang();
         HienThiDanhSachKhachHang(dskh);
+    }
+
+    private void ClearTextbox() {
+        txtMaKH.setText("");
+        txtTenKH.setText("");
+        cbGioiTinh.setSelectedIndex(0);
+        txtDiaChi.setText("");
+        txtSDT.setText("");
+        txtEmail.setText("");
+        txtMaKH.requestFocus(true);
     }
 
     private void getDanhSanhKhachHang() {
@@ -57,8 +70,9 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
                 kh.setTenKH(rs.getString(2));
                 kh.setGioitinh(rs.getString(3));
                 kh.setDiaChi(rs.getString(4));
-                kh.setEmail(rs.getString(5));
-                kh.setSdt(rs.getString(6));
+                kh.setSdt(rs.getString(5));
+                kh.setEmail(rs.getString(6));
+
                 dskh.add(kh);
             }
             // close connection
@@ -77,18 +91,97 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
             Vector data = null;
             for (KhachHang kh : dskh) {
                 data = new Vector();
-                data.add(kh.getMaKH());
-                data.add(kh.getTenKH());
-                data.add(kh.getGioitinh());
-                data.add(kh.getDiaChi());
-                data.add(kh.getSdt());
-                 data.add(kh.getEmail());
+                data.add(0, kh.getMaKH());
+                data.add(1, kh.getTenKH());
+                data.add(2, kh.getGioitinh());
+                data.add(3, kh.getDiaChi());
+                data.add(4, kh.getSdt());
+                data.add(5, kh.getEmail());
                 tblModel.addRow(data);
             }
             jTableQLKH.setModel(tblModel);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void seachKH() {
+        ArrayList<KhachHang> listKh = new ArrayList<>();
+        String tenKH = txtTim.getText();
+        int d = 0;
+        for (KhachHang khachHang : dskh) {
+            if (tenKH.equalsIgnoreCase(khachHang.getTenKH().trim())) {
+                d++;
+                listKh.add(khachHang);
+            }
+        }
+            HienThiDanhSachKhachHang(listKh);
+        
+    }
+
+    private void deleteKH() {
+        String maKH = txtMaKH.getText();
+        KhachHang kh = new KhachHang(maKH);
+        if (dskh.contains(kh)) {
+            int result = JOptionPane.showConfirmDialog(null,
+                    "Bạn có chắc muốn xóa khách hàng này",
+                    "Xác nhận",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                dskh.remove(kh);
+                try {
+                    conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+                    stmt = conn.createStatement();
+                    // xóa dữ liệu cho bảng khách hàng
+                    String sql = "DELETE FROM KhachHang WHERE MaKH='" + maKH + "'";
+                    stmt.executeUpdate(sql);
+                    conn.close();
+                } catch (Exception ex) {
+                    Logger.getLogger(JPanelFormQLKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "Không có khách hàng này", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
+        HienThiDanhSachKhachHang(dskh);
+
+    }
+
+    private void updateKH() {
+
+        String maKH = txtMaKH.getText();
+        String tenKH = txtTenKH.getText();
+        String gioTinh = (String) cbGioiTinh.getSelectedItem();
+        String diaChi = txtDiaChi.getText();
+        String sdt = txtSDT.getText();
+        String email = txtEmail.getText();
+        KhachHang kh = new KhachHang(maKH);
+
+        if (dskh.contains(kh)) {
+            int index = dskh.indexOf(kh);
+            kh = dskh.get(index);
+            kh = new KhachHang(kh.getMaKH(), tenKH, gioTinh, diaChi, sdt, email);
+            dskh.set(index, kh);
+            try {
+                conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+                stmt = conn.createStatement();
+                // Them dữ liệu cho bảng khách hàng
+                String sql = "UPDATE KhachHang SET TenKH=N'" + tenKH + "',GioiTinh=N'" + gioTinh + "',DiaChi=N'" + diaChi + "',SDT='" + sdt + "',Email='" + email
+                        + "' WHERE MaKH='" + maKH + "'";
+                stmt.executeUpdate(sql);
+                conn.close();
+                JOptionPane.showMessageDialog(null, "Update thông tin khách hàng " + kh.getMaKH() + " thành công !", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            } catch (Exception ex) {
+                Logger.getLogger(JPanelFormQLKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Không có khách hàng này", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
+        HienThiDanhSachKhachHang(dskh);
     }
 
     private void ThemKH() {
@@ -109,7 +202,7 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
                 conn = getConnection(DB_URL, USER_NAME, PASSWORD);
                 stmt = conn.createStatement();
                 // Them dữ liệu cho bảng khách hàng
-                String sql="insert into KhachHang values('" + maKH + "'" + ",N'" + tenKH + "',N'" + gioTinh + "',N'" + diaChi + "','" + sdt + "','" + email + "')";
+                String sql = "insert into KhachHang values('" + maKH + "'" + ",N'" + tenKH + "',N'" + gioTinh + "',N'" + diaChi + "','" + sdt + "','" + email + "')";
                 stmt.executeUpdate(sql);
                 conn.close();
             } catch (Exception ex) {
@@ -118,9 +211,14 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
 
         }
 
-        HienThiDanhSachKhachHang(dskh);
     }
 
+//    private void loadCB() {
+//        gt.add(0, "Nam");
+//        gt.add(1, "Nữ");
+//        cbGioiTinh.setModel(new DefaultComboBoxModel(gt));
+//
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,8 +239,6 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        txtSDT = new javax.swing.JTextField();
-        txtDiaChi = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnCapNhat = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
@@ -153,6 +249,8 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
         btnLoc = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableQLKH = new javax.swing.JTable();
+        txtDiaChi = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
 
         setMinimumSize(new java.awt.Dimension(900, 600));
         setLayout(null);
@@ -181,13 +279,13 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
         add(cbGioiTinh);
         cbGioiTinh.setBounds(150, 140, 190, 25);
 
-        txtTenKH.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtTenKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         add(txtTenKH);
-        txtTenKH.setBounds(150, 100, 190, 28);
+        txtTenKH.setBounds(150, 100, 190, 30);
 
-        txtMaKH.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtMaKH.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         add(txtMaKH);
-        txtMaKH.setBounds(150, 60, 190, 28);
+        txtMaKH.setBounds(150, 60, 190, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel5.setText("Địa Chỉ");
@@ -204,17 +302,9 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
         add(jLabel7);
         jLabel7.setBounds(430, 140, 70, 20);
 
-        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         add(txtEmail);
-        txtEmail.setBounds(510, 140, 190, 28);
-
-        txtSDT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        add(txtSDT);
-        txtSDT.setBounds(510, 100, 190, 28);
-
-        txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        add(txtDiaChi);
-        txtDiaChi.setBounds(510, 60, 190, 28);
+        txtEmail.setBounds(510, 140, 190, 30);
 
         btnThem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnThem.setText("Thêm");
@@ -228,11 +318,21 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
 
         btnCapNhat.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnCapNhat.setText("Cập Nhật");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
         add(btnCapNhat);
         btnCapNhat.setBounds(720, 100, 160, 29);
 
         btnXoa.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
         add(btnXoa);
         btnXoa.setBounds(720, 140, 160, 29);
 
@@ -243,6 +343,11 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
 
         btnTimKiem.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
         add(btnTimKiem);
         btnTimKiem.setBounds(450, 230, 109, 27);
 
@@ -290,15 +395,61 @@ public class JPanelFormQLKhachHang extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTableQLKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableQLKHMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableQLKH);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(0, 262, 900, 340);
+        jScrollPane1.setBounds(0, 260, 900, 340);
+
+        txtDiaChi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        add(txtDiaChi);
+        txtDiaChi.setBounds(510, 60, 190, 30);
+
+        txtSDT.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        add(txtSDT);
+        txtSDT.setBounds(510, 100, 190, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         ThemKH();// TODO add your handling code here:
+        HienThiDanhSachKhachHang(dskh);
+        ClearTextbox();
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void jTableQLKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableQLKHMouseClicked
+        // TODO add your handling code here:
+        int selectRow = jTableQLKH.getSelectedRow();
+        KhachHang kh = new KhachHang();
+        kh = dskh.get(selectRow);
+        txtMaKH.setText(kh.getMaKH());
+        txtTenKH.setText(kh.getTenKH());
+        if (kh.getGioitinh().equalsIgnoreCase("Nam")) {
+            cbGioiTinh.setSelectedIndex(0);
+        } else {
+            cbGioiTinh.setSelectedIndex(1);
+        }
+        txtDiaChi.setText(kh.getDiaChi());
+        txtSDT.setText(kh.getSdt());
+        txtEmail.setText(kh.getEmail());
+
+
+    }//GEN-LAST:event_jTableQLKHMouseClicked
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        updateKH();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        deleteKH(); // TODO add your handling code here:
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        seachKH();// TODO add your handling code here:
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

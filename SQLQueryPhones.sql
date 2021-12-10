@@ -125,3 +125,4 @@ insert into TaiKhoanAdmin values('chickenhero','05092000','QL001')
 insert into TaiKhoanAdmin values('1','1','QL001')
 
 insert into TaiKhoanNV values('2','2','KT001')
+Select * from KhachHang 
